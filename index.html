@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>枣庄市两枣数智化平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 顶部横幅 -->
+    <div class="top-banner">
+        <div class="banner-left">
+            <div class="time-filter-wrapper">
+                <select class="time-filter-select" id="timeDimension">
+                    <option value="last7days">近7天</option>
+                    <option value="last30days">近30天</option>
+                    <option value="thisWeek">本周</option>
+                    <option value="lastWeek">上周</option>
+                    <option value="thisMonth">本月</option>
+                    <option value="lastMonth">上月</option>
+                    <option value="thisYear">今年</option>
+                    <option value="lastYear">去年</option>
+                </select>
+                <select class="region-filter-select" id="regionFilter">
+                    <option value="all">全部地区</option>
+                    <optgroup label="市中区">
+                        <option value="city_center">中心街街道</option>
+                        <option value="city_saiwa">赛瓦街道</option>
+                        <option value="city_culture">文化路街道</option>
+                        <option value="city_dongfang">东方红街道</option>
+                        <option value="city_hexing">和兴街道</option>
+                        <option value="city_donghu">东湖街道</option>
+                        <option value="city_longshan">龙山街道</option>
+                        <option value="city_tongyuan">通源街道</option>
+                        <option value="city_xiwang">西王庄镇</option>
+                        <option value="city_qihe">齐村镇</option>
+                        <option value="city_tao">陶庄镇</option>
+                        <option value="city_man">孟庄镇</option>
+                    </optgroup>
+                    <optgroup label="薛城区">
+                        <option value="xue_cheng">临城街道</option>
+                        <option value="xue_sha">沙沟镇</option>
+                        <option value="xue_zhou">周营镇</option>
+                        <option value="xue_chang">常庄镇</option>
+                        <option value="xue_tang">陶庄镇</option>
+                        <option value="xue_zhang">张范镇</option>
+                    </optgroup>
+                    <optgroup label="峄城区">
+                        <option value="yi_tanshan">坛山街道</option>
+                        <option value="yi_wulin">吴林街道</option>
+                        <option value="yi_caozhuang">曹庄街道</option>
+                        <option value="yi_yicheng">峄城镇</option>
+                        <option value="yi_wujia">吴家镇</option>
+                        <option value="yi_guancun">官庄村</option>
+                        <option value="yi_xiezhuang">谢庄镇</option>
+                        <option value="yi_gushao">古邵镇</option>
+                        <option value="yi_yinping">阴平镇</option>
+                    </optgroup>
+                    <optgroup label="台儿庄区">
+                        <option value="tai_canal">运河街道</option>
+                        <option value="tai_mashan">马兰屯镇</option>
+                        <option value="tai_dian">泥沟镇</option>
+                        <option value="tai_zhang">张山子镇</option>
+                        <option value="tai_shanting">山亭镇</option>
+                        <option value="tai_lou">涧头集镇</option>
+                    </optgroup>
+                    <optgroup label="山亭区">
+                        <option value="shan_shancheng">山城街道</option>
+                        <option value="shan_fengmao">冯卯镇</option>
+                        <option value="shan_chengtou">城头镇</option>
+                        <option value="shan_dianzi">店子镇</option>
+                        <option value="shan_xuzhuang">徐庄镇</option>
+                        <option value="shan_beizhuang">北庄镇</option>
+                        <option value="shan_sangcun">桑村镇</option>
+                        <option value="shan_shuiquan">水泉镇</option>
+                        <option value="shan_xiji">西集镇</option>
+                    </optgroup>
+                    <optgroup label="滕州市">
+                        <option value="teng_longquan">龙泉街道</option>
+                        <option value="teng_jinghe">荆河街道</option>
+                        <option value="teng_beixin">北辛街道</option>
+                        <option value="teng_shannan">善南街道</option>
+                        <option value="teng_dongshahe">东沙河镇</option>
+                        <option value="teng_guozhuang">郭庄镇</option>
+                        <option value="teng_longyang">龙阳镇</option>
+                        <option value="teng_jiehe">界河镇</option>
+                        <option value="teng_guanqiao">官桥镇</option>
+                        <option value="teng_xigang">西岗镇</option>
+                        <option value="teng_jiangtun">姜屯镇</option>
+                        <option value="teng_baogou">鲍沟镇</option>
+                        <option value="teng_dawu">大坞镇</option>
+                        <option value="teng_binhutown">滨湖镇</option>
+                        <option value="teng_nanshahe">南沙河镇</option>
+                        <option value="teng_jisuo">级索镇</option>
+                        <option value="teng_mushi">木石镇</option>
+                        <option value="teng_yangzhuang">羊庄镇</option>
+                        <option value="teng_zhangwang">张汪镇</option>
+                        <option value="teng_hongxu">洪绪镇</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="time-display-wrapper">
+                <div class="time-display" id="timeDisplay"></div>
+            </div>
+        </div>
+        <div class="banner-center">
+            <div class="title-wrapper">
+                <div class="title-glow"></div>
+                <h1 class="platform-title">"枣解决 枣满意"数智化平台</h1>
+                <div class="title-base-decoration"></div>
+                <div class="title-underline"></div>
+            </div>
+            <!-- 预警提示容器 -->
+            <div class="alert-notification" id="alertNotification"></div>
+        </div>
+        <div class="banner-right">
+            <button class="banner-btn" id="flexibleSupervision">柔性督办</button>
+            <button class="banner-btn" id="activeGovernance">主动治理工作台</button>
+            <button class="banner-btn" id="aiReport">AI报告</button>
+            <button class="banner-btn exit-btn" id="exitPlatform" title="退出">
+                <span class="exit-icon">×</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 中间地图区域 -->
+        <div class="center-panel">
+            <div class="map-container">
+                <!-- 底层模糊地图 - 铺满页面 -->
+                <img src="Maps/枣庄11.png" alt="枣庄市地图" class="map-image map-background">
+                <!-- 顶层清晰地图 - 中心高亮 -->
+                <div class="map-foreground-container">
+                    <img src="Maps/枣庄4.png" alt="枣庄市地图" id="mapImage" class="map-image map-foreground">
+                    <canvas id="mapCanvas" class="map-canvas"></canvas>
+                    <div id="mapMarkers" class="map-markers"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 左侧模块区域 -->
+        <div class="left-panel">
+            <div class="left-panel-grid">
+                <!-- 数据融合模块 -->
+                <div class="module data-fusion" id="dataFusionModule">
+                    <div class="module-header">
+                        <h3>数据融合</h3>
+                    </div>
+                    <div class="module-content">
+                        <div class="data-channels">
+                            <div class="channels-scroll-wrapper">
+                                <div class="channels-scroll-content">
+                                    <div class="channel-item">
+                                        <div class="channel-name">12345来电</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">"两枣"网络端</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">市场主体</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">110转接</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">市政府网站</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">省政府网站</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">省接诉即办</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">中国政府网留言</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">互联网+督查</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <!-- 复制内容以实现无缝循环 -->
+                                    <div class="channel-item">
+                                        <div class="channel-name">12345来电</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">"两枣"网络端</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">市场主体</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">110转接</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">市政府网站</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">省政府网站</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">省接诉即办</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">中国政府网留言</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <div class="channel-name">互联网+督查</div>
+                                        <div class="channel-status active">已接入</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalData">1,234,567</div>
+                                <div class="stat-label">数据总量（条）</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="todayData">8,901</div>
+                                <div class="stat-label">今日新增</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 善治指数模块 -->
+                <div class="module governance-index">
+                    <div class="module-header">
+                        <h3>"枣解决 枣满意"善治指数</h3>
+                    </div>
+                    <div class="module-content">
+                        <div class="primary-indicators">
+                            <div class="primary-indicator-item" data-index="publicWelfare">
+                                <div class="primary-indicator-header">
+                                    <div class="indicator-name-wrapper">
+                                        <h4>民生指数</h4>
+                                        <span class="primary-indicator-english">Public Welfare Index</span>
+                                    </div>
+                                    <div class="indicator-score-wrapper">
+                                        <span class="indicator-score" id="publicWelfareScore">85.6</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="primary-indicator-item" data-index="marketEntities">
+                                <div class="primary-indicator-header">
+                                    <div class="indicator-name-wrapper">
+                                        <h4>市场主体指数</h4>
+                                        <span class="primary-indicator-english">Market Entities Index</span>
+                                    </div>
+                                    <div class="indicator-score-wrapper">
+                                        <span class="indicator-score" id="marketEntitiesScore">82.3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 督办效果模块 -->
+                <div class="module supervision-effect" id="supervisionEffectModule">
+                    <div class="module-header">
+                        <h3>督办效果</h3>
+                    </div>
+                    <div class="module-content">
+                        <div class="supervision-stats">
+                            <div class="supervision-item">
+                                <div class="supervision-number" id="supervisionTotal">1,234</div>
+                                <div class="supervision-label">督办事项总数</div>
+                            </div>
+                            <div class="supervision-item">
+                                <div class="supervision-number" id="supervisionCompleted">1,156</div>
+                                <div class="supervision-label">已完成</div>
+                            </div>
+                            <div class="supervision-item">
+                                <div class="supervision-number" id="supervisionRate">93.7%</div>
+                                <div class="supervision-label">完成率</div>
+                            </div>
+                        </div>
+                        <div id="supervisionChart" class="chart-container"></div>
+                    </div>
+                </div>
+
+                <!-- 主动治理模块 -->
+                <div class="module active-governance">
+                    <div class="module-header">
+                        <h3>主动治理成效</h3>
+                    </div>
+                    <div class="module-content">
+                        <div class="governance-effectiveness-list" id="governanceEffectivenessList">
+                            <!-- 内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 关注人群高频诉求模块 -->
+                <div class="module key-person-requests">
+                    <div class="module-header">
+                        <h3>关注人群高频诉求</h3>
+                    </div>
+                    <div class="module-content">
+                        <div class="population-requests-scroll-wrapper">
+                            <div class="population-requests-scroll-content" id="populationRequestsScrollContent">
+                                <!-- 内容将通过JavaScript生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 治理挑战指数模块 -->
+                <div class="module challenge-index">
+                    <div class="module-header">
+                        <h3>治理挑战指数</h3>
+                        <div class="challenge-field-labels">
+                            <span class="field-label">治理事项</span>
+                            <span class="field-label">地区</span>
+                            <span class="field-label">分值</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <div class="challenge-cards-container">
+                            <!-- 内容将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据融合弹窗 -->
+        <div class="data-fusion-modal" id="dataFusionModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>数据融合概览</h3>
+                    <button class="modal-close-btn" id="closeDataFusionModal">×</button>
+                </div>
+                <div class="thinking-chain" id="thinkingChain">
+                    <div class="thinking-dot"></div>
+                    <div class="thinking-dot"></div>
+                    <div class="thinking-dot"></div>
+                </div>
+                <div class="modal-body">
+                    <div class="ai-summary-section">
+                        <div class="ai-summary-title">AI数据总结</div>
+                        <div class="ai-summary-text" id="dataFusionAISummary">
+                            <!-- AI总结内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    <div class="channels-overview" id="channelsOverview">
+                        <!-- 渠道数据将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 善治指数弹出框 -->
+        <div class="governance-index-modal" id="governanceIndexModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="governanceModalTitle">"枣解决 枣满意"善治指数详情</h3>
+                    <button class="modal-close-btn" id="closeGovernanceIndexModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="governance-modal-layout">
+                        <div class="secondary-indicators-list" id="secondaryIndicatorsList">
+                            <!-- 二级指标列表将通过JavaScript生成 -->
+                        </div>
+                        <div class="tertiary-indicators-detail" id="tertiaryIndicatorsDetail">
+                            <div class="empty-state">
+                                <p>请选择左侧二级指标查看详情</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI分析弹窗（二级弹窗） -->
+        <div class="governance-secondary-modal" id="aiAnalysisModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="aiAnalysisModalTitle">AI分析</h3>
+                    <button class="modal-close-btn" id="closeAiAnalysisModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ai-analysis-summary" id="aiAnalysisSummary">
+                        <!-- AI总结将通过JavaScript生成 -->
+                    </div>
+                    <div class="demand-source-section">
+                        <h4>诉求来源</h4>
+                        <div class="demand-table-wrapper">
+                            <table class="demand-table" id="demandTable">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>地点</th>
+                                        <th>诉求内容</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="demandTableBody">
+                                    <!-- 表格数据将通过JavaScript生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 柔性督办弹窗 -->
+        <div class="flexible-supervision-modal" id="flexibleSupervisionModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>柔性督办</h3>
+                    <button class="modal-close-btn" id="closeFlexibleSupervisionModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 第一部分：数据分析结果摘要 -->
+                    <div class="supervision-section">
+                        <div class="section-title-wrapper">
+                            <h4 class="section-title">数据分析结果摘要</h4>
+                            <button class="summary-collapse-btn" id="summaryCollapseBtn" title="收起/展开">▼</button>
+                        </div>
+                        <div class="data-summary-content" id="dataSummaryContent">
+                            <!-- 内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 第二部分：推送单位选择 -->
+                    <div class="supervision-section">
+                        <div class="section-header-with-action">
+                            <h4 class="section-title">推送单位选择</h4>
+                            <button class="select-all-btn" id="selectAllUnits">一键全选</button>
+                        </div>
+                        <div class="unit-selection-content">
+                            <div class="unit-selection-list" id="unitSelectionList">
+                                <!-- 单位列表将通过JavaScript生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第三部分：推送频率制定 -->
+                    <div class="supervision-section">
+                        <h4 class="section-title">推送频率制定</h4>
+                        <div class="frequency-selection-content">
+                            <div class="frequency-options">
+                                <label class="frequency-option">
+                                    <input type="radio" name="frequency" value="daily" checked>
+                                    <span>日</span>
+                                </label>
+                                <label class="frequency-option">
+                                    <input type="radio" name="frequency" value="weekly">
+                                    <span>周</span>
+                                </label>
+                                <label class="frequency-option">
+                                    <input type="radio" name="frequency" value="quarterly">
+                                    <span>季度</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div class="supervision-actions">
+                        <button class="action-btn push-btn" id="pushToActiveGovernance">立即推送</button>
+                        <button class="action-btn schedule-btn" id="schedulePush">定时推送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主动治理工作台弹窗 -->
+        <div class="active-governance-modal" id="activeGovernanceModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>主动治理工作台</h3>
+                    <div class="modal-header-actions">
+                        <button class="helper-assistant-btn" id="openHelperAssistant">帮办助手</button>
+                        <button class="modal-close-btn" id="closeActiveGovernanceModal">×</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="governance-workbench-content" id="governanceWorkbenchContent">
+                        <div class="empty-state" id="governanceEmptyState">
+                            <p>暂无推送任务</p>
+                            <p class="empty-hint">从"柔性督办"推送的任务将显示在这里</p>
+                        </div>
+                        <div class="governance-tasks-list" id="governanceTasksList" style="display: none;">
+                            <!-- 推送的任务列表将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 帮办助手弹窗 -->
+        <div class="helper-assistant-modal" id="helperAssistantModal">
+            <div class="modal-overlay"></div>
+            <div class="helper-assistant-content">
+                <button class="helper-close-btn" id="closeHelperAssistant">×</button>
+                <iframe id="helperAssistantIframe" src="https://poc1.dknowc.cn/wlcb/YiZhuang-policy/#/index" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- AI报告弹窗 -->
+        <div class="ai-report-modal" id="aiReportModal">
+            <div class="modal-overlay"></div>
+            <div class="ai-report-content">
+                <button class="ai-report-close-btn" id="closeAIReport">×</button>
+                <iframe id="aiReportIframe" src="https://qbi-screen-tdemo.ifqb.com/report" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- 数据分析详情弹窗 -->
+        <div class="data-detail-modal" id="dataDetailModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>数据分析详情</h3>
+                    <button class="modal-close-btn" id="closeDataDetailModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="data-detail-content" id="dataDetailContent">
+                        <!-- 详情内容将通过JavaScript生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关注人群详情弹窗 -->
+        <div class="concerned-population-modal" id="concernedPopulationModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="concernedPopulationModalTitle">关注人群详情</h3>
+                    <button class="modal-close-btn" id="closeConcernedPopulationModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 人数统计部分 -->
+                    <div class="population-stats-section">
+                        <div class="section-title">人数统计</div>
+                        <div class="population-stats-grid" id="populationStatsGrid">
+                            <!-- 人数统计内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- AI分析部分 -->
+                    <div class="population-ai-section">
+                        <div class="section-title">AI分析</div>
+                        <div class="ai-analysis-content" id="populationAIAnalysis">
+                            <div class="ai-analysis-generating" id="aiAnalysisGenerating">
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-text">AI正在分析中...</span>
+                            </div>
+                            <div class="ai-analysis-text" id="populationAIAnalysisText" style="display: none;">
+                                <!-- AI分析内容将通过JavaScript逐字生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 地区分布部分 -->
+                    <div class="population-region-section">
+                        <div class="section-title">地区分布</div>
+                        <div class="region-distribution-list" id="regionDistributionList">
+                            <!-- 地区分布内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 诉求占比部分 -->
+                    <div class="population-request-ratio-section">
+                        <div class="section-title">诉求占比</div>
+                        <div class="request-ratio-content" id="requestRatioContent">
+                            <!-- 诉求占比内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 高频诉求类型部分 -->
+                    <div class="population-high-frequency-section">
+                        <div class="section-title">高频诉求类型</div>
+                        <div class="high-frequency-list" id="highFrequencyList">
+                            <!-- 高频诉求类型内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 诉求多元化详情弹窗 -->
+        <div class="demand-diversity-modal" id="demandDiversityModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="demandDiversityModalTitle">诉求多元化详情</h3>
+                    <button class="modal-close-btn" id="closeDemandDiversityModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 数据统计部分 -->
+                    <div class="diversity-stats-section">
+                        <div class="section-title">数据统计</div>
+                        <div class="diversity-stats-grid" id="demandDiversityStats">
+                            <!-- 数据统计内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- AI分析部分 -->
+                    <div class="diversity-ai-section">
+                        <div class="section-title">AI分析</div>
+                        <div class="ai-analysis-content" id="demandDiversityAIAnalysis">
+                            <div class="ai-analysis-generating" id="demandDiversityAIGenerating">
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-text">AI正在分析中...</span>
+                            </div>
+                            <div class="ai-analysis-text" id="demandDiversityAIAnalysisText" style="display: none;">
+                                <!-- AI分析内容将通过JavaScript逐字生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 诉求分类下钻部分 -->
+                    <div class="diversity-drilldown-section">
+                        <div class="section-title">诉求分类下钻</div>
+                        <div class="drilldown-content" id="demandDiversityDrilldown">
+                            <!-- 诉求分类下钻内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 治理挑战指数详情弹窗 -->
+        <div class="challenge-index-modal" id="challengeIndexModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="challengeIndexModalTitle">治理挑战指数详情</h3>
+                    <button class="modal-close-btn" id="closeChallengeIndexModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 分值构成部分 -->
+                    <div class="challenge-score-breakdown-section">
+                        <div class="section-title">分值构成</div>
+                        <div class="score-breakdown-list" id="challengeScoreBreakdown">
+                            <!-- 分值构成内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- AI分析部分 -->
+                    <div class="challenge-ai-section">
+                        <div class="section-title">AI分析</div>
+                        <div class="ai-analysis-content" id="challengeIndexAIAnalysis">
+                            <div class="ai-analysis-generating" id="challengeIndexAIGenerating">
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-text">AI正在分析中...</span>
+                            </div>
+                            <div class="ai-analysis-text" id="challengeIndexAIAnalysisText" style="display: none;">
+                                <!-- AI分析内容将通过JavaScript逐字生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 治理建议部分 -->
+                    <div class="challenge-suggestions-section">
+                        <div class="section-title">治理建议</div>
+                        <div class="suggestions-content" id="challengeSuggestions">
+                            <!-- 治理建议内容将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关注人群高频诉求详情弹窗 -->
+        <div class="population-request-modal" id="populationRequestModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="populationRequestModalTitle">关注人群高频诉求详情</h3>
+                    <button class="modal-close-btn" id="closePopulationRequestModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 详细统计数据 -->
+                    <div class="population-details-section">
+                        <div class="section-title">详细统计</div>
+                        <div class="population-details-grid">
+                            <div class="population-detail-card">
+                                <div class="detail-card-title">人群信息</div>
+                                <div class="detail-card-content">
+                                    <div class="population-name" id="detailPopulationName">新市民劳动者</div>
+                                    <div class="population-desc" id="detailPopulationDesc">重点关注人群</div>
+                                </div>
+                            </div>
+                            
+                            <div class="population-detail-card">
+                                <div class="detail-card-title">高频诉求</div>
+                                <div class="detail-card-content">
+                                    <div class="request-type-name" id="detailRequestType">住房保障</div>
+                                    <div class="request-count-value" id="detailRequestCount">12,456件</div>
+                                </div>
+                            </div>
+                            
+                            <div class="population-detail-card">
+                                <div class="detail-card-title">诉求占比</div>
+                                <div class="detail-card-content">
+                                    <div class="request-percentage" id="detailRequestPercentage">45.2%</div>
+                                    <div class="request-trend" id="detailRequestTrend">较上月 ↑ 3.2%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI分析部分 -->
+                    <div class="population-ai-section">
+                        <div class="section-title">AI分析</div>
+                        <div class="ai-analysis-content" id="populationRequestAIAnalysis">
+                            <div class="ai-analysis-generating" id="populationRequestAIGenerating">
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-text">AI正在分析中...</span>
+                            </div>
+                            <div class="ai-analysis-text" id="populationRequestAIAnalysisText" style="display: none;">
+                                <!-- AI分析内容将通过JavaScript逐字生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主动治理成效详情弹窗 -->
+        <div class="governance-effectiveness-modal" id="governanceEffectivenessModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="effectivenessModalTitle">主动治理成效详情</h3>
+                    <button class="modal-close-btn" id="closeGovernanceEffectivenessModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 详细统计数据 -->
+                    <div class="effectiveness-details-section">
+                        <div class="section-title">详细统计</div>
+                        <div class="effectiveness-details-grid">
+                            <div class="detail-card">
+                                <div class="detail-card-title">总体诉求</div>
+                                <div class="detail-card-content">
+                                    <div class="detail-before">
+                                        <span class="detail-label">治理前</span>
+                                        <span class="detail-value" id="detailTotalBefore">156件</span>
+                                    </div>
+                                    <div class="detail-arrow">→</div>
+                                    <div class="detail-after">
+                                        <span class="detail-label">治理后</span>
+                                        <span class="detail-value" id="detailTotalAfter">98件</span>
+                                    </div>
+                                </div>
+                                <div class="detail-change" id="detailTotalChange">-37.2%</div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <div class="detail-card-title">疑难诉求</div>
+                                <div class="detail-card-content">
+                                    <div class="detail-before">
+                                        <span class="detail-label">治理前</span>
+                                        <span class="detail-value" id="detailDifficultBefore">23件</span>
+                                    </div>
+                                    <div class="detail-arrow">→</div>
+                                    <div class="detail-after">
+                                        <span class="detail-label">治理后</span>
+                                        <span class="detail-value" id="detailDifficultAfter">12件</span>
+                                    </div>
+                                </div>
+                                <div class="detail-change" id="detailDifficultChange">-47.8%</div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <div class="detail-card-title">高频诉求</div>
+                                <div class="detail-card-content">
+                                    <div class="detail-before">
+                                        <span class="detail-label">治理前</span>
+                                        <span class="detail-value" id="detailHighFreqBefore">45件</span>
+                                    </div>
+                                    <div class="detail-arrow">→</div>
+                                    <div class="detail-after">
+                                        <span class="detail-label">治理后</span>
+                                        <span class="detail-value" id="detailHighFreqAfter">18件</span>
+                                    </div>
+                                </div>
+                                <div class="detail-change" id="detailHighFreqChange">-60.0%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI分析部分 -->
+                    <div class="effectiveness-ai-section">
+                        <div class="section-title">AI分析</div>
+                        <div class="ai-analysis-content" id="effectivenessAIAnalysis">
+                            <div class="ai-analysis-generating" id="effectivenessAIGenerating">
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-text">AI正在分析中...</span>
+                            </div>
+                            <div class="ai-analysis-text" id="effectivenessAIAnalysisText" style="display: none;">
+                                <!-- AI分析内容将通过JavaScript逐字生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 督办效果弹窗 -->
+        <div class="supervision-effect-modal" id="supervisionEffectModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>督办效果详情</h3>
+                    <button class="modal-close-btn" id="closeSupervisionEffectModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 督办事项统计 -->
+                    <div class="supervision-stats-section">
+                        <div class="section-title">督办事项统计</div>
+                        <div class="supervision-stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="modalSupervisionTotal">1,234</div>
+                                <div class="stat-label">督办事项总数</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="modalSupervisionCompleted">1,156</div>
+                                <div class="stat-label">已完成</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="modalSupervisionPending">78</div>
+                                <div class="stat-label">待处理</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 完成率统计 -->
+                    <div class="supervision-rate-section">
+                        <div class="section-title">完成率统计</div>
+                        <div class="rate-display">
+                            <div class="rate-circle">
+                                <div class="rate-value" id="modalSupervisionRate">93.7%</div>
+                                <div class="rate-label">总体完成率</div>
+                            </div>
+                            <div class="rate-details">
+                                <div class="rate-item">
+                                    <span class="rate-item-label">按时完成率</span>
+                                    <span class="rate-item-value" id="modalOnTimeRate">89.2%</span>
+                                </div>
+                                <div class="rate-item">
+                                    <span class="rate-item-label">超期完成率</span>
+                                    <span class="rate-item-value" id="modalOverdueRate">4.5%</span>
+                                </div>
+                                <div class="rate-item">
+                                    <span class="rate-item-label">平均处理时长</span>
+                                    <span class="rate-item-value" id="modalAvgTime">2.3天</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI分析部分 -->
+                    <div class="supervision-ai-section">
+                        <div class="section-title">AI分析</div>
+                        <div class="ai-analysis-content" id="supervisionAIAnalysis">
+                            <div class="ai-analysis-generating" id="supervisionAIGenerating">
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-dot"></span>
+                                <span class="generating-text">AI正在分析中...</span>
+                            </div>
+                            <div class="ai-analysis-text" id="supervisionAIAnalysisText" style="display: none;">
+                                <!-- AI分析内容将通过JavaScript逐字生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI助手按钮 -->
+        <div class="ai-assistant-container">
+            <img src="数字人.png" alt="AI助手数字人" class="ai-digital-human" />
+            <div class="ai-assistant-toggle" id="aiAssistantToggle">
+                <div class="ai-label">AI助手</div>
+            </div>
+        </div>
+
+        <!-- AI助手遮罩层 -->
+        <div class="ai-assistant-overlay" id="aiAssistantOverlay"></div>
+        
+        <!-- AI助手面板 -->
+        <div class="ai-assistant-panel" id="aiAssistantPanel">
+            <button class="ai-close-btn" id="aiCloseBtn">×</button>
+            <div class="ai-chat-container" id="aiChatContainer">
+                <div class="ai-welcome">
+                    <div class="ai-message">
+                        <p class="ai-greeting">您好,我是您的AI助手</p>
+                        <p class="ai-suggestions">如果还没想好,您可以试着问我:</p>
+                        <div class="suggestion-chips">
+                            <span class="chip" data-question="请详细分析最近一个月各区域的诉求分布情况，包括趋势变化、主要问题类型及其占比，并提供针对性的治理建议">请详细分析最近一个月各区域的诉求分布情况，包括趋势变化、主要问题类型及其占比，并提供针对性的治理建议</span>
+                            <span class="chip" data-question="基于历史数据和当前治理效果，预测未来一季度民生善治指数的变化趋势，并深入分析影响指数变化的关键因素">基于历史数据和当前治理效果，预测未来一季度民生善治指数的变化趋势，并深入分析影响指数变化的关键因素</span>
+                            <span class="chip" data-question="综合分析督办效果与主动治理的关系，评估两者协同作用对整体治理效能的影响，并提出优化方案">综合分析督办效果与主动治理的关系，评估两者协同作用对整体治理效能的影响，并提出优化方案</span>
+                            <span class="chip" data-question="对比分析重点人群与新业态人员的管理现状，识别潜在风险点，并提出差异化的治理策略">对比分析重点人群与新业态人员的管理现状，识别潜在风险点，并提出差异化的治理策略</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-input-container">
+                <div class="ai-input-header">
+                    <button id="newConversationBtn" class="new-conversation-btn">开启新对话</button>
+                </div>
+                <div class="ai-input-wrapper">
+                    <input type="text" id="aiInput" class="ai-input" placeholder="请输入你的问题" />
+                    <button id="aiSendBtn" class="ai-send-btn">
+                        <span>发送</span>
+                        <span class="send-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧模块区域 -->
+        <div class="right-panel">
+            <!-- 关注人群模块 -->
+            <div class="module risk-governance">
+                <div class="module-header">
+                    <h3>关注人群</h3>
+                </div>
+                <div class="module-content">
+                    <div class="concerned-population-grid" id="concernedPopulationGrid">
+                        <!-- 内容将通过JavaScript生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 智能预测模块 -->
+            <div class="module ai-prediction">
+                <div class="module-header">
+                    <h3>智能预测</h3>
+                </div>
+                <div class="module-content">
+                    <div class="prediction-controls">
+                        <select id="predictionPeriod" class="prediction-select">
+                            <option value="week">未来一周</option>
+                            <option value="month">未来一月</option>
+                            <option value="quarter">未来一季</option>
+                        </select>
+                        <button id="updatePrediction" class="prediction-btn" title="更新预测">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 2V6L10 4M8 14V10L6 12M14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button id="locationPrediction" class="prediction-btn location-btn" title="定位">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 8C9.10457 8 10 7.10457 10 6C10 4.89543 9.10457 4 8 4C6.89543 4 6 4.89543 6 6C6 7.10457 6.89543 8 8 8Z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M8 2C5.79086 2 4 3.79086 4 6C4 8.5 8 14 8 14C8 14 12 8.5 12 6C12 3.79086 10.2091 2 8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="prediction-summary">
+                        <div class="prediction-item">
+                            <div class="prediction-label">预测诉求量</div>
+                            <div class="prediction-value" id="predictedCount">1,234</div>
+                        </div>
+                        <div class="prediction-item">
+                            <div class="prediction-label">主要趋势</div>
+                            <div class="prediction-value trend-up" id="predictedTrend">↑ 上升 15%</div>
+                        </div>
+                    </div>
+                    <div id="predictionChart" class="chart-container"></div>
+                    <div class="prediction-reasons" id="predictionReasonsSection">
+                        <div class="reason-title">主要原因分析</div>
+                        <div class="reason-list" id="reasonList">
+                            <div class="reason-item">
+                                <div class="reason-text">季节性因素：夏季高温导致环境类诉求增加</div>
+                                <div class="reason-weight">影响权重: 35%</div>
+                            </div>
+                            <div class="reason-item">
+                                <div class="reason-text">政策变化：新政策实施引发咨询类诉求上升</div>
+                                <div class="reason-weight">影响权重: 28%</div>
+                            </div>
+                            <div class="reason-item">
+                                <div class="reason-text">区域发展：城市建设带来相关投诉增多</div>
+                                <div class="reason-weight">影响权重: 22%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 诉求多元化模块 -->
+            <div class="module population-portrait">
+                <div class="module-header">
+                    <h3>诉求多元化</h3>
+                </div>
+                <div class="module-content">
+                    <div class="demand-diversity-chart" id="demandDiversityChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录界面 -->
+    <div class="login-page" id="loginPage">
+        <div class="login-background">
+            <img src="登录界面.jpg" alt="登录界面背景">
+        </div>
+        <!-- 管理按钮 -->
+        <button class="login-admin-btn" id="loginAdminBtn" title="管理">管理</button>
+        <div class="login-container">
+            <!-- 平台主题名称 -->
+            <div class="login-platform-title">"枣解决 枣满意"数智化平台</div>
+            
+            <div class="login-window">
+                <div class="login-header">
+                    <h2>用户登录</h2>
+                </div>
+                <div class="login-body">
+                    <form id="loginForm">
+                        <div class="login-input-group">
+                            <label for="username">用户名</label>
+                            <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+                        </div>
+                        <div class="login-input-group">
+                            <label for="password">密码</label>
+                            <input type="password" id="password" name="password" placeholder="请输入密码" required>
+                        </div>
+                        <div class="login-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <span>记住我</span>
+                            </label>
+                            <a href="#" class="forgot-password">忘记密码？</a>
+                        </div>
+                        <button type="submit" class="login-btn">登录</button>
+                    </form>
+                </div>
+                <!-- 底部机构名称 -->
+                <div class="login-footer">
+                    <div class="login-footer-org">枣庄市市民诉求办理服务中心</div>
+                    <div class="login-footer-tech">技术支持：山东亚微软件股份有限公司</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要原因分析弹窗 -->
+    <div class="prediction-reason-modal" id="predictionReasonModal">
+        <div class="prediction-reason-modal-overlay"></div>
+        <div class="prediction-reason-modal-content">
+            <div class="prediction-reason-modal-header">
+                <h3>主要原因分析详情</h3>
+                <button class="prediction-reason-modal-close" id="closePredictionReasonModal">×</button>
+            </div>
+            <div class="prediction-reason-modal-body">
+                <!-- AI总结部分 -->
+                <div class="prediction-reason-ai-summary-section">
+                    <div class="section-title">AI总结</div>
+                    <div class="ai-analysis-content" id="predictionReasonAISummary">
+                        <div class="ai-analysis-generating" id="predictionReasonAIGenerating">
+                            <span class="generating-dot"></span>
+                            <span class="generating-dot"></span>
+                            <span class="generating-dot"></span>
+                            <span class="generating-text">AI正在分析中...</span>
+                        </div>
+                        <div class="ai-analysis-text" id="predictionReasonAISummaryText" style="display: none;">
+                            <!-- AI总结内容将通过JavaScript逐字生成 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI预测原因分析部分 -->
+                <div class="prediction-reason-analysis-section">
+                    <div class="section-title">AI预测原因分析</div>
+                    <div class="ai-analysis-content" id="predictionReasonAnalysis">
+                        <div class="ai-analysis-generating" id="predictionReasonAnalysisGenerating">
+                            <span class="generating-dot"></span>
+                            <span class="generating-dot"></span>
+                            <span class="generating-dot"></span>
+                            <span class="generating-text">AI正在分析中...</span>
+                        </div>
+                        <div class="ai-analysis-text" id="predictionReasonAnalysisText" style="display: none;">
+                            <!-- AI预测原因分析内容将通过JavaScript逐字生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 管理界面 -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-modal-overlay"></div>
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h3>系统管理</h3>
+                <button class="admin-modal-close" id="closeAdminModal">×</button>
+            </div>
+            <div class="admin-modal-body">
+                <div class="admin-menu-grid">
+                    <div class="admin-menu-item" data-module="organization">
+                        <div class="admin-menu-icon">🏢</div>
+                        <div class="admin-menu-title">基础组织管理</div>
+                        <div class="admin-menu-desc">组织架构、部门管理</div>
+                    </div>
+                    <div class="admin-menu-item" data-module="permission">
+                        <div class="admin-menu-icon">🔐</div>
+                        <div class="admin-menu-title">权限管理</div>
+                        <div class="admin-menu-desc">角色权限、用户权限</div>
+                    </div>
+                    <div class="admin-menu-item" data-module="model">
+                        <div class="admin-menu-icon">🤖</div>
+                        <div class="admin-menu-title">模型管理</div>
+                        <div class="admin-menu-desc">AI模型配置、训练</div>
+                    </div>
+                    <div class="admin-menu-item" data-module="agent">
+                        <div class="admin-menu-icon">👤</div>
+                        <div class="admin-menu-title">智能体管理</div>
+                        <div class="admin-menu-desc">智能体配置、调度</div>
+                    </div>
+                    <div class="admin-menu-item" data-module="database">
+                        <div class="admin-menu-icon">💾</div>
+                        <div class="admin-menu-title">数据库管理</div>
+                        <div class="admin-menu-desc">数据源、连接配置</div>
+                    </div>
+                    <div class="admin-menu-item" data-module="api">
+                        <div class="admin-menu-icon">🔌</div>
+                        <div class="admin-menu-title">API管理</div>
+                        <div class="admin-menu-desc">接口配置、调用管理</div>
+                    </div>
+                    <div class="admin-menu-item" data-module="index">
+                        <div class="admin-menu-icon">📊</div>
+                        <div class="admin-menu-title">指数管理</div>
+                        <div class="admin-menu-desc">指数配置、计算规则</div>
+                    </div>
+                    <div class="admin-menu-item" data-module="password">
+                        <div class="admin-menu-icon">🔑</div>
+                        <div class="admin-menu-title">密码管理</div>
+                        <div class="admin-menu-desc">密码策略、重置</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
